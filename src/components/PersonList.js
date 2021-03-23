@@ -8,7 +8,7 @@ const PersonList = (props) => {
         return(
             
                     <div key={list.id} className="box">
-                        <div className="id-box"><h1>{list.id}</h1></div>
+                        <div className="id-box"><span>{list.id}</span></div>
                         <div className="list-content">
                             <h3>{list.name}</h3>
                             <h4>{list.phone}</h4>

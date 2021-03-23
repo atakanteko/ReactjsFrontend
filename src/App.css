@@ -84,7 +84,10 @@ h1,h2,h3,h4,h5{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 20px;
+    margin-right: 110px;
+    margin-left: 100px;
+    font-size: 16px;
+    font-weight: 600;
 }
 .list-content{
    
