@@ -3,6 +3,8 @@ import PersonList from './PersonList'
 import AddPerson from './AddPerson'
 import phoneBookService from '../services/phonebook'
 import loginService from '../services/login' 
+import LoginForm from './LoginForm'
+import Togglable from './Togglable'
 
 
 const Container = () => {
@@ -12,6 +14,8 @@ const Container = () => {
         const [password, setPassword] = useState('') 
 
         const [user, setUser] = useState(null)
+
+        const [loginVisible, setLoginVisible] = useState(false)
 
         const handleLogin = async  (event) => {
             event.preventDefault()
@@ -29,6 +33,9 @@ const Container = () => {
                 console.log("Error:",exception);
               }
           }
+
+          
+
           useEffect(() => {
             const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
             if (loggedUserJSON) {
@@ -71,6 +78,25 @@ const Container = () => {
             setUser(null)
             window.localStorage.clear()
         }
+
+        const loginForm =() =>{
+            
+
+            return(
+                
+                
+                        <Togglable buttonLabel='login'>
+                            <LoginForm
+                            username = {username}
+                            password = {password}
+                            handleUsernameChange = {({target})=>setUsername(target.value)}
+                            handlePasswordChange ={({target})=>setPassword(target.value)}
+                            handleSubmit={handleLogin}
+                            />
+                        </Togglable>
+
+            )
+        }
         return(
             <div className="disp-container">
                 <div className="person-list">
@@ -89,30 +115,8 @@ const Container = () => {
                         logOut={()=>{handleLogOut()}}/>
                         : 
                         //!Login ---------------
-                            <div className="login">
-                                <form onSubmit={handleLogin}>
-                                <div className="form-group">
-                                <label>Username</label>
-                                <input 
-                                    type="text" 
-                                    name="username"
-                                    value={username}
-                                    onChange={({target}) => setUsername(target.value)} 
-                                    className="form-control"/>
-                                </div>
-                                <div className="form-group">
-                                <label>Password</label>
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    value={password}
-                                    onChange={({target})=>setPassword(target.value)} 
-                                    className="form-control"/>
-                                </div>
-                                <button type="submit" className="btn btn-success">Login</button>
-                                </form>
-                            </div>
-                        //!Login ---------------------------   
+                        loginForm()                            
+                        //!Login --------------- 
                     }
                      
                      
